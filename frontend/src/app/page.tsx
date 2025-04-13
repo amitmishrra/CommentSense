@@ -1,6 +1,6 @@
 'use client';
 
-import ChatBot from "@/containers/Chatbot";
+import ChatBot from "@/app/Chatbot/page";
 
 export default function Home() {
   return (
