@@ -45,16 +45,19 @@ const ChatBot = () => {
       text: userMessage,
     });
 
-    const response = await fetch("http://localhost:6969/rag/ask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        question: userMessage,
-        conversationHistory: conversationHistory,
-      }),
-    });
+    const response = await fetch(
+      "https://commentsense-wqo0.onrender.com/rag/ask",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          question: userMessage,
+          conversationHistory: conversationHistory,
+        }),
+      }
+    );
 
     const data = await response.json();
     setIsLoading(false);
@@ -65,7 +68,9 @@ const ChatBot = () => {
   const handleSend = async () => {
     if (isBlocked || !input.trim()) return;
     setInput("");
-    const userMessagesCount = messages.filter((m) => m.sender === "user").length;
+    const userMessagesCount = messages.filter(
+      (m) => m.sender === "user"
+    ).length;
 
     if (userMessagesCount >= MESSAGE_LIMIT) {
       const blockUntil = Date.now() + BLOCK_DURATION;
@@ -123,9 +128,13 @@ const ChatBot = () => {
             <div ref={bottomRef} />
           </div>
         ) : (
-          <div className="flex-1 overflow-y-auto space-y-2 p-4 justify-center items-center flex flex-col gap-6 text-center">
-            <img src="assets/hi.png" alt="bot say hii" className="h-60" />
-            <div className="text-center">Say hi! to Comment sense...</div>
+          <div className="flex-1 overflow-y-auto p-6 flex flex-col items-center justify-center gap-6 text-center">
+            <img src="assets/hi.png" alt="Bot says hi" className="h-40" />
+            <h2 className="text-2xl font-semibold">Say hi to CommentSense!</h2>
+            <p className="text-sm text-red-400 max-w-md">
+              ⚠️ Warning: This bot is extremely offensive and unapologetically
+              disrespectful. Engage at your own risk. You’ve been warned.
+            </p>
           </div>
         )}
 
@@ -150,7 +159,9 @@ const ChatBot = () => {
           />
           <div
             onClick={handleSend}
-            className={`cursor-pointer ${isBlocked ? "opacity-50 pointer-events-none" : ""}`}
+            className={`cursor-pointer ${
+              isBlocked ? "opacity-50 pointer-events-none" : ""
+            }`}
           >
             <img src="assets/send.png" alt="send message" className="h-10" />
           </div>

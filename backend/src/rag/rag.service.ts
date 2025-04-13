@@ -13,7 +13,7 @@ export class RagService {
     const embedding = await this.gemini.getEmbedding(question);
     const similarComments = await this.vector.searchSimilar(embedding, 15);
   
-    console.log('🔍 Similar Comments:\n', similarComments);
+    // console.log('🔍 Similar Comments:\n', similarComments);
   
     const context = similarComments
       .filter((c) => c && c.trim() !== '')
