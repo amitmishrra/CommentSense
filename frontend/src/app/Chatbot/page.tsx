@@ -46,7 +46,7 @@ const ChatBot = () => {
     });
 
     const response = await fetch(
-      "http://localhost:6969/rag/ask",
+      "https://commentsense-wqo0.onrender.com/rag/ask",
       {
         method: "POST",
         headers: {
